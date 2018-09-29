@@ -5,7 +5,7 @@
         <input type="text" placeholder="请输入邮箱" v-model="email">
       </div>
       <div class="item">
-        <input type="password" placeholder="请输入密码" v-model="password">
+        <input type="password" placeholder="请输入密码" v-model="password" @keyup.enter="handleLogin">
       </div>
       <div class="item">
         <el-button type="primary" class="el_btn" @click="handleLogin">登录</el-button>
@@ -13,13 +13,19 @@
       <div class="item">
         <el-button class="el_btn" @click="handleRegister">注册</el-button>
       </div>
+      <div class="item">
+      <p style="color:#999;font-size:18px;">this note is very pretend bility</p>
+      </div>
+      <div class="item">
+        <p style="color:#999;font-size:22px;">IT牛人都在用的笔记</p>
+      </div>
     </div>
     <div class="user-box" v-else>
       <div class="user-box-item user-icon">
         <img :src="usermsg.avatar">
       </div>
       <div class="name-item">
-        用户名:  {{usermsg.username}}
+          {{usermsg.username}}
       </div>
       <div class="email-item">
         email:  {{usermsg.email}}
@@ -29,12 +35,6 @@
           退出登陆
         </el-button>
       </div>
-    </div>
-    <div class="item">
-      <p style="color:#999;font-size:18px;">this note is very pretend bility</p>
-    </div>
-    <div class="item">
-      <p style="color:#999;font-size:22px;">IT牛人都在用的笔记</p>
     </div>
   </div>
 </template>
@@ -64,6 +64,7 @@
             this.$store.commit('CHANGE_USERINFO',res.data)
             this.initData()
             this.$message.success(res.msg)
+            this.$router.push('/')
           }else{
             this.$message.error(res.msg)
           }
@@ -73,11 +74,11 @@
         this.$router.push('/register')
       },
       handleLoout () {
-        this.usermsg.email = '';
-        this.usermsg.username = '';
+        this.usermsg.username = ""
         this.$axios.delete('/logOut').then(res => {
           if(res.data.code == 200){
-            alert('退出登陆成功')
+            sessionStorage.clear();
+            this.$message.success(res.data.msg)
           }
           else {
             alert(res.data.msg);
@@ -121,7 +122,7 @@
 }
 
 .user-box {
-    padding-top: 30px;
+    padding: 30px 0;
     .user-icon {
       text-align: center;
       img {
@@ -129,13 +130,20 @@
         height: 100px;
       }
     }
-    .name-item,.email-item {
+    .name-item{
       text-align: center;
       margin-top: 20px;
-      font-size: 16px;
+      font-size: 26px;
       color: #333;
       font-weight: 400;
       line-height: 36px;
+    }
+
+    .email-item{
+      font-family: STHupo;
+      text-align: center;
+      margin-top: 20px;
+      color:#bbb;
     }
   }
 </style>

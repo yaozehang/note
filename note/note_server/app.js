@@ -6,16 +6,19 @@ var logger = require('morgan');
 
 var Routers = require('./controller/index');
 
+var session = require('express-session')
+
 var app = express();
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/cloud_book');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, '连接失败'));
-db.once('open', function() {
-  // we're connected!
-  console.log("连接成功")
-});
+app.use(session({
+  name: 'yao',
+  secret: 'yao',  //加言签名
+  resave: false,  //是否重新保存session    
+  saveUninitialized: true, //是否保存未被初始化的session
+  cookie: { secure: false } //是否遵循https协议
+}))
+
+const mongooseConnect = require('./database/config')
 
 
 // view engine setup

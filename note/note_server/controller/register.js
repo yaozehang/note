@@ -6,6 +6,9 @@ const md5 = require("blueimp-md5");
 
 router.post('/register', (req, res) => {
   let addData = req.body;
+  let avatarNumber = Math.ceil(Math.random()*9)
+  let avatar = `http://pbl.yaojunrong.com/avatar${avatarNumber}.jpg`
+  addData.avatar = avatar
 
   user.findOne({email:addData.email}).then(data => {
     if(data) {

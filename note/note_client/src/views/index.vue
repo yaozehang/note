@@ -2,7 +2,8 @@
   <div>
     <div class="top-box w980">
       <div class="box-left">
-      <Banner></Banner>
+         <Banner></Banner>
+         <Article></Article>
       </div>
       <Userbox></Userbox>
     </div>
@@ -12,11 +13,13 @@
 <script>
   import Userbox from "../components/Userbox.vue"
   import Banner from '../components/Banner.vue'
+  import Article from '../components/Article.vue'
 
   export default {
     components:{
       Banner,
-      Userbox
+      Userbox,
+      Article
     }
   }
 </script>
@@ -24,6 +27,7 @@
 <style scoped>
 .box-left {
     width: 750px;
+    margin-bottom:30px;
   }
   .top-box {
     margin-top: 50px;

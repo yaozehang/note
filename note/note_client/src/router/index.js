@@ -6,7 +6,10 @@ import 'nprogress/nprogress.css'
 
 const components = {
   index: () => import('@/views/index'),
-  register: () => import('@/views/register')
+  register: () => import('@/views/register'),
+  writeNote: () => import('@/views/writeNote'),
+  article: () => import('@/views/article'),
+  search: () => import('@/views/search')
 }
 
 Vue.use(Router)
@@ -17,11 +20,41 @@ const router = new Router({
       path:'/',
       name:'index',
       component:components.index,
+      meta:{
+        title:'云笔记'
+      }
     },
     {
       path:'/register',
       name:'register',
-      component:components.register
+      component:components.register,
+      meta:{
+        title:'注册'
+      }
+    },
+    {
+      path:'/writeNote',
+      name:'writeNote',
+      component:components.writeNote,
+      meta:{
+        title:'写笔记'
+      }
+    },
+    {
+      path:'/article/:id',
+      name:'article',
+      component:components.article,
+      meta:{
+        title:'文章详情'
+      }
+    },
+    {
+      path:'/search',
+      name:'search',
+      component:components.search,
+      meta:{
+        title:'搜索'
+      }
     }
   ]
 })

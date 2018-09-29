@@ -36,4 +36,10 @@ export default {
   .fll {
     float: left;
   }
+
+  .clearfix::after{
+    content:'';
+    display:block;
+    clear:both;
+  }
 </style>
